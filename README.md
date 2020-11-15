@@ -20,7 +20,7 @@ Some specific things that we are looking for:
 - Correct implementation of a state manager
 - Correct implementation of a navigation solution
 - Componentization
-- Communiation in the repo and/or code
+- Communication in the repo and/or code
 - Best practices with API calls and data
 - Separation of concerns between business and UI logic
 
