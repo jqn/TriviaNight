@@ -11,7 +11,7 @@ const RootStack = createStackNavigator();
 const RootNavigator = () => {
   return (
     <NavigationContainer>
-      <RootStack.Navigator>
+      <RootStack.Navigator screenOptions={{ headerShown: false }}>
         <RootStack.Screen name="Home" component={Home} />
         <RootStack.Screen name="Quiz" component={Quiz} />
         <RootStack.Screen name="Results" component={Results} />
