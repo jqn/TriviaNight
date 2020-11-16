@@ -2,7 +2,7 @@ import React from "react";
 import { useWindowDimensions, View, StyleSheet, Text } from "react-native";
 import PropTypes from "prop-types";
 
-const Card = ({ body, border }) => {
+const Card = ({ body, border, cardWidth, cardHeight }) => {
   const window = useWindowDimensions();
 
   return (
@@ -10,7 +10,7 @@ const Card = ({ body, border }) => {
       style={[
         styles.container,
         border ? styles.border : styles.borderless,
-        { width: window.width - 68, height: window.width - 68 },
+        { width: cardWidth, height: cardHeight },
       ]}
     >
       <Text style={styles.bodyText}>{body}</Text>
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: "center",
     alignItems: "center",
-    padding: 8,
+    padding: 16,
     alignSelf: "center",
   },
   bodyText: {
@@ -38,10 +38,17 @@ const styles = StyleSheet.create({
 });
 
 Card.defaultProps = {
-  body: "You will be presented with 10 True of False questions.",
+  body: "",
   border: true,
+  cardWidth: 200,
+  cardHeight: 200,
 };
 
-Card.propTypes = { body: PropTypes.string, border: PropTypes.bool };
+Card.propTypes = {
+  body: PropTypes.string,
+  border: PropTypes.bool,
+  cardWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  cardHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+};
 
 export default Card;

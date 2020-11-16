@@ -2,7 +2,7 @@ import React from "react";
 import { View, StyleSheet, Text } from "react-native";
 import PropTypes from "prop-types";
 
-const StepTracker = ({ text }) => {
+const Hint = ({ text }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.bodyText}>{text}</Text>
@@ -24,8 +24,8 @@ const styles = StyleSheet.create({
   },
 });
 
-StepTracker.defaultProps = { text: "Can you score 100%?" };
+Hint.defaultProps = { text: "" };
 
-StepTracker.propTypes = { text: PropTypes.string };
+Hint.propTypes = { text: PropTypes.string };
 
-export default StepTracker;
+export default Hint;

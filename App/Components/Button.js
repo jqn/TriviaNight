@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
   button: {
     padding: 16,
     alignSelf: "center",
-    width: 200,
+    width: 164,
     alignContent: "center",
     borderRadius: 4,
     paddingVertical: 16,
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   pressed: { backgroundColor: "#78909C" },
 });
 
-Button.defaultProps = { buttonTitle: "Begin", onButtonPress: () => {} };
+Button.defaultProps = { buttonTitle: "", onButtonPress: () => {} };
 
 Button.propTypes = {
   buttonTitle: PropTypes.string,

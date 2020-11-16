@@ -2,10 +2,10 @@ import React from "react";
 import { View, StyleSheet, Text } from "react-native";
 import PropTypes from "prop-types";
 
-const Header = ({ headerTitle }) => {
+const Header = ({ title }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{headerTitle}</Text>
+      <Text style={styles.title}>{title}</Text>
     </View>
   );
 };
@@ -25,10 +25,11 @@ const styles = StyleSheet.create({
 });
 
 Header.defaultProps = {
-  headerTitle: "Welcome to the Trivia Challenge",
+  title: "",
 };
 
-headerTitle: "Welcome to the Trivia Challenge",
-  (Header.propTypes = { headerTitle: PropTypes.string });
+Header.propTypes = {
+  title: PropTypes.string,
+};
 
 export default Header;
