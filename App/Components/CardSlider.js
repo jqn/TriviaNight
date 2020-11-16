@@ -12,6 +12,7 @@ import {
 import { Html5Entities } from "html-entities";
 
 import Card from "./Card";
+import Hint from "./Hint";
 
 const { UIManager } = NativeModules;
 const entities = new Html5Entities();
@@ -30,7 +31,6 @@ const styles = StyleSheet.create({
 });
 
 const Item = ({ content }) => {
-  console.log("Item -> content", content);
   // Use html-entities to decode entity characters in string
   return (
     <Card
@@ -93,31 +93,35 @@ const CardSlider = ({
   };
 
   return (
-    <FlatList
-      ref={slider}
-      data={data}
-      horizontal
-      pagingEnabled={true}
-      snapToInterval={totalItemWidth}
-      decelerationRate="fast"
-      bounces={false}
-      showsHorizontalScrollIndicator={false}
-      renderItem={renderItem}
-      windowSize={1}
-      initialNumToRender={1}
-      maxToRenderPerBatch={1}
-      removeClippedSubviews={true}
-      initialScrollIndex={initialIndex}
-      keyExtractor={(item) => item.id}
-      extraData={selectedId}
-      getItemLayout={(data, index) => ({
-        length: totalItemWidth,
-        offset: totalItemWidth * index,
-        index,
-      })}
-      onViewableItemsChanged={onViewRef.current}
-      viewabilityConfig={viewConfigRef.current}
-    />
+    <View>
+      <FlatList
+        ref={slider}
+        data={data}
+        horizontal
+        pagingEnabled={true}
+        // scrollEnabled={false}
+        snapToInterval={totalItemWidth}
+        decelerationRate="fast"
+        bounces={false}
+        showsHorizontalScrollIndicator={false}
+        renderItem={renderItem}
+        windowSize={1}
+        initialNumToRender={1}
+        maxToRenderPerBatch={1}
+        removeClippedSubviews={true}
+        initialScrollIndex={initialIndex}
+        keyExtractor={(item) => item.id}
+        extraData={selectedId}
+        getItemLayout={(data, index) => ({
+          length: totalItemWidth,
+          offset: totalItemWidth * index,
+          index,
+        })}
+        onViewableItemsChanged={onViewRef.current}
+        viewabilityConfig={viewConfigRef.current}
+      />
+      <Hint text="1 of 10" />
+    </View>
   );
 };
 

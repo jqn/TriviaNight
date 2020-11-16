@@ -50,7 +50,6 @@ const Quiz = () => {
       <Header title={data[0].category} />
       <Section>
         <CardSlider data={data} />
-        <Hint text="1 of 10" />
       </Section>
       <View style={styles.group}>
         <Button buttonTitle="true" />

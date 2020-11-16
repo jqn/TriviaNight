@@ -1,4 +1,4 @@
-# Trivia Game Coding Challenge
+# Trivia Night
 
 ## Overview
 
