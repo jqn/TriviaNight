@@ -13,7 +13,7 @@ import Section from "../Components/Section";
 import Button from "../Components/Button";
 import Loader from "../Components/Loader";
 
-const Quiz = () => {
+const Quiz = ({ navigation }) => {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   useEffect(() => {
@@ -53,7 +53,10 @@ const Quiz = () => {
       </Section>
       <View style={styles.group}>
         <Button buttonTitle="true" />
-        <Button buttonTitle="false" />
+        <Button
+          buttonTitle="false"
+          onButtonPress={() => navigation.navigate("Results")}
+        />
       </View>
     </SafeAreaView>
   );
