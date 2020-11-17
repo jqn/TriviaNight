@@ -10,7 +10,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const PERSISTENCE_KEY = "NAVIGATION_STATE_V01";
+const PERSISTENCE_KEY = "NAVIGATION_STATE_V02";
 
 const RootStack = createStackNavigator();
 

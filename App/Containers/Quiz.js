@@ -22,16 +22,16 @@ const Quiz = () => {
         const response = await axios.get(
           "https://opentdb.com/api.php?amount=10&difficulty=hard&type=boolean"
         );
-        // console.log(
-        //   "Quiz -> response",
-        //   decodeURIComponent(JSON.parse(response))
-        // );
         const { status, data } = response;
         if (status !== 200) {
           throw new Error("Something went wrong!");
         }
-
-        setData(data.results);
+        let questions = data.results.map((r) => ({
+          ...r,
+          id: `${Math.floor(Math.random() * 1000)}`,
+        }));
+        console.log("Quiz -> questions", questions);
+        setData(questions);
       } catch (error) {
         console.log("Quiz -> error", error);
       } finally {
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
   },
   group: {
     flexDirection: "row",
-    justifyContent: "space-evenly",
+    justifyContent: "space-between",
   },
 });
 

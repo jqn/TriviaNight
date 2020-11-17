@@ -7,6 +7,8 @@ import {
   NativeModules,
   StyleSheet,
   View,
+  SafeAreaView,
+  Text,
 } from "react-native";
 
 import { Html5Entities } from "html-entities";
@@ -21,13 +23,16 @@ UIManager.setLayoutAnimationEnabledExperimental &&
   UIManager.setLayoutAnimationEnabledExperimental(true);
 
 const styles = StyleSheet.create({
-  item: {
-    backgroundColor: "#454545",
+  container: {
+    justifyContent: "center",
   },
-  photo: {
-    width: Math.round(Dimensions.get("window").width - 32),
-    height: 200,
-  },
+  // item: {
+  //   backgroundColor: "#454545",
+  // },
+  // photo: {
+  //   width: Math.round(Dimensions.get("window").width - 32),
+  //   height: 200,
+  // },
 });
 
 const Item = ({ content }) => {
@@ -78,6 +83,7 @@ const CardSlider = ({
   const renderItem = ({ item }) => {
     const backgroundColor = item.id === selectedId ? "#727272" : "#3a3a3a";
 
+    console.log("renderItem -> item", item);
     const setIndex = (selectedItem) => {
       setSelectedId(selectedItem.id);
       indexCallback(selectedItem.id);
@@ -93,7 +99,7 @@ const CardSlider = ({
   };
 
   return (
-    <View>
+    <SafeAreaView>
       <FlatList
         ref={slider}
         data={data}
@@ -108,9 +114,9 @@ const CardSlider = ({
         windowSize={1}
         initialNumToRender={1}
         maxToRenderPerBatch={1}
-        removeClippedSubviews={true}
+        removeClippedSubSafeAreaViews={true}
         initialScrollIndex={initialIndex}
-        keyExtractor={(item) => item.id}
+        keyExtractor={({ id }) => id}
         extraData={selectedId}
         getItemLayout={(data, index) => ({
           length: totalItemWidth,
@@ -121,7 +127,7 @@ const CardSlider = ({
         viewabilityConfig={viewConfigRef.current}
       />
       <Hint text="1 of 10" />
-    </View>
+    </SafeAreaView>
   );
 };
 

@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
     alignContent: "center",
     borderRadius: 4,
     paddingVertical: 16,
+    marginHorizontal: 8,
   },
   default: { backgroundColor: "#F57C00" },
   pressed: { backgroundColor: "#78909C" },
