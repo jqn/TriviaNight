@@ -83,7 +83,6 @@ const CardSlider = ({
   const renderItem = ({ item }) => {
     const backgroundColor = item.id === selectedId ? "#727272" : "#3a3a3a";
 
-    console.log("renderItem -> item", item);
     const setIndex = (selectedItem) => {
       setSelectedId(selectedItem.id);
       indexCallback(selectedItem.id);

@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { View, StyleSheet } from "react-native";
 
-import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { SafeAreaView } from "react-native-safe-area-context";
 import axios from "axios";
 import PropTypes from "prop-types";
 
+import { connect } from "react-redux";
+import { addPlayQuestions } from "../Actions/Play";
+
 import Header from "../Components/Header";
-import Card from "../Components/Card";
 import CardSlider from "../Components/CardSlider";
-import Hint from "../Components/Hint";
 import Section from "../Components/Section";
 import Button from "../Components/Button";
 import Loader from "../Components/Loader";
 
-const Quiz = ({ navigation }) => {
+const Quiz = ({ navigation, dispatch, questions }) => {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   useEffect(() => {
@@ -26,12 +27,13 @@ const Quiz = ({ navigation }) => {
         if (status !== 200) {
           throw new Error("Something went wrong!");
         }
+
         let questions = data.results.map((r) => ({
           ...r,
           id: `${Math.floor(Math.random() * 1000)}`,
         }));
-        console.log("Quiz -> questions", questions);
         setData(questions);
+        dispatch(addPlayQuestions(questions));
       } catch (error) {
         console.log("Quiz -> error", error);
       } finally {
@@ -39,6 +41,11 @@ const Quiz = ({ navigation }) => {
       }
     };
     fetchData();
+    // if (!activePlay) {
+    //   fetchData();
+    // } else {
+    //   setLoading(false);
+    // }
   }, []);
 
   if (loading) {
@@ -47,9 +54,9 @@ const Quiz = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Header title={data[0].category} />
+      <Header title={questions[0].category} />
       <Section>
-        <CardSlider data={data} />
+        <CardSlider data={questions} />
       </Section>
       <View style={styles.group}>
         <Button buttonTitle="true" />
@@ -77,4 +84,9 @@ Quiz.defaultProps = {};
 
 Quiz.propTypes = {};
 
-export default Quiz;
+const mapStateToProps = (state) => ({
+  // activePlay: state.play.active,
+  questions: state.questionData.questions,
+});
+
+export default connect(mapStateToProps)(Quiz);

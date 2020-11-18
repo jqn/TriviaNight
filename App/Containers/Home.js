@@ -1,8 +1,9 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
-import PropTypes from "prop-types";
+import { StyleSheet } from "react-native";
 
-import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import PropTypes from "prop-types";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { connect } from "react-redux";
 
 import Header from "../Components/Header";
 import Card from "../Components/Card";
@@ -11,6 +12,10 @@ import Hint from "../Components/Hint";
 import Section from "../Components/Section";
 
 const Home = ({ navigation }) => {
+  const beginTrivia = () => {
+    navigation.navigate("Quiz");
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <Header title="Welcome to the Trivia Challenge" />
@@ -23,10 +28,7 @@ const Home = ({ navigation }) => {
         />
         <Hint text="Can you score 100%?" />
       </Section>
-      <Button
-        onButtonPress={() => navigation.navigate("Quiz")}
-        buttonTitle="Begin"
-      />
+      <Button onButtonPress={beginTrivia} buttonTitle="Begin" />
     </SafeAreaView>
   );
 };
@@ -42,4 +44,4 @@ Home.defaultProps = {};
 
 Home.propTypes = {};
 
-export default Home;
+export default connect(null)(Home);
