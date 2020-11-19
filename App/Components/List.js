@@ -8,52 +8,43 @@ import {
   StatusBar,
 } from "react-native";
 
-const DATA = [
-  {
-    id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-    title: "The Kingdom of Prussia briefly held land in Estonia.",
-  },
-  {
-    id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-    title: "Second Item",
-  },
-  {
-    id: "58694a0f-3da1-471f-bd96-145571e29d72",
-    title: "Third Item",
-  },
-  {
-    id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28bc",
-    title: "Fourth Item",
-  },
-  {
-    id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f64",
-    title: "Fifth Item",
-  },
-  {
-    id: "58694a0f-3da1-471f-bd96-145571e29d73",
-    title: "Sixt Item",
-  },
-  {
-    id: "58694a0f-3da1-471f-bd96-145571e29d74",
-    title: "Seventh Item",
-  },
-];
+import { Html5Entities } from "html-entities";
+import { Ionicons } from "@expo/vector-icons";
 
-const Item = ({ title }) => (
+const Item = ({ title, correct }) => (
   <View style={styles.item}>
-    <Text style={styles.title}>{title}</Text>
+    <Ionicons
+      name={
+        correct === "True"
+          ? "md-checkmark-circle-outline"
+          : "md-close-circle-outline"
+      }
+      size={35}
+      color={correct === "True" ? "#F57C00" : "#4b636e"}
+      style={styles.icon}
+    />
+    <View style={styles.content}>
+      <Text style={styles.title}>{title}</Text>
+    </View>
   </View>
 );
 
-const List = () => {
-  const renderItem = ({ item }) => <Item title={item.title} />;
+const List = ({ data }) => {
+  const entities = new Html5Entities();
+  const renderItem = ({ item }) => (
+    <Item
+      title={entities.decode(item.question)}
+      correct={item.correct_answer}
+    />
+  );
 
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
-        data={DATA}
+        data={data}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
+        showsVerticalScrollIndicator={false}
       />
     </SafeAreaView>
   );
@@ -65,13 +56,23 @@ const styles = StyleSheet.create({
     marginTop: StatusBar.currentHeight || 0,
   },
   item: {
-    backgroundColor: "#f9c2ff",
-    padding: 20,
     marginVertical: 8,
     marginHorizontal: 16,
+    flexDirection: "row",
   },
   title: {
-    fontSize: 32,
+    fontSize: 20,
+    fontFamily: "System",
+    fontWeight: "500",
+  },
+  icon: {
+    paddingRight: 16,
+    paddingTop: 8,
+  },
+  content: {
+    width: "90%",
+    // backgroundColor: "#ECEFF1",
+    padding: 8,
   },
 });
 

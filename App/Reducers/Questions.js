@@ -1,19 +1,17 @@
-import { START_PLAY, ADD_PLAY_QUESTIONS } from "../Actions/Questions";
+import { RESET_QUESTIONS, SET_QUESTIONS } from "../Actions/Questions";
 
-export const questionData = (
-  state = {
-    questions: [],
-    nextQuestionTime: null,
-    askedQuestions: [],
-  },
-  action
-) => {
+const initialState = {
+  questions: [],
+  askedQuestions: [],
+};
+
+export const questionData = (state = initialState, action) => {
   switch (action.type) {
-    case START_PLAY:
-      return { ...state, active: action.active };
-    case ADD_PLAY_QUESTIONS:
+    case SET_QUESTIONS:
       console.log("action", action);
       return { ...state, questions: action.questionList };
+    case RESET_QUESTIONS:
+      return initialState;
     default:
       return state;
   }

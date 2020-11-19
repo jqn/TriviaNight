@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     paddingVertical: 16,
     marginHorizontal: 8,
+    marginTop: 16,
   },
   default: { backgroundColor: "#F57C00" },
   pressed: { backgroundColor: "#78909C" },

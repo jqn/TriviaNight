@@ -6,7 +6,8 @@ import axios from "axios";
 import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
-import { addPlayQuestions } from "../Actions/Play";
+import { setQuestions } from "../Actions/Questions";
+import { setAnswer } from "../Actions/User";
 
 import Header from "../Components/Header";
 import CardSlider from "../Components/CardSlider";
@@ -16,13 +17,16 @@ import Loader from "../Components/Loader";
 
 const Quiz = ({ navigation, dispatch, questions }) => {
   const [loading, setLoading] = useState(true);
-  const [data, setData] = useState([]);
+  const [questionIndex, setQuestionIndex] = useState(null);
+  const [cardTitle, setCardTitle] = useState("");
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
           "https://opentdb.com/api.php?amount=10&difficulty=hard&type=boolean"
         );
+        console.log("Quiz -> response", response);
         const { status, data } = response;
         if (status !== 200) {
           throw new Error("Something went wrong!");
@@ -30,23 +34,39 @@ const Quiz = ({ navigation, dispatch, questions }) => {
 
         let questions = data.results.map((r) => ({
           ...r,
-          id: `${Math.floor(Math.random() * 1000)}`,
+          id: `${Math.floor(Math.random() * 1000)}-${Date.now()}`,
         }));
-        setData(questions);
-        dispatch(addPlayQuestions(questions));
+        dispatch(setQuestions(questions));
       } catch (error) {
         console.log("Quiz -> error", error);
       } finally {
         setLoading(false);
+        setQuestionIndex(0);
       }
     };
-    fetchData();
-    // if (!activePlay) {
-    //   fetchData();
-    // } else {
-    //   setLoading(false);
-    // }
+
+    if (questions.length === 0) {
+      fetchData();
+      return;
+    }
+    setLoading(false);
+    setQuestionIndex(0);
   }, []);
+
+  useEffect(() => {
+    if (questionIndex !== null && questions.length !== 0) {
+      setCardTitle(questions[questionIndex].category);
+    }
+  }, [questionIndex]);
+
+  const next = (answer) => {
+    if (questionIndex < questions.length - 1) {
+      dispatch(setAnswer({ id: questions[questionIndex].id, answer: answer }));
+      setQuestionIndex((questionIndex) => questionIndex + 1);
+      return;
+    }
+    navigation.navigate("Results");
+  };
 
   if (loading) {
     return <Loader />;
@@ -54,16 +74,13 @@ const Quiz = ({ navigation, dispatch, questions }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Header title={questions[0].category} />
+      <Header title={cardTitle} />
       <Section>
-        <CardSlider data={questions} />
+        <CardSlider data={questions} index={questionIndex} />
       </Section>
       <View style={styles.group}>
-        <Button buttonTitle="true" />
-        <Button
-          buttonTitle="false"
-          onButtonPress={() => navigation.navigate("Results")}
-        />
+        <Button buttonTitle="true" onButtonPress={() => next(true)} />
+        <Button buttonTitle="false" onButtonPress={() => next(false)} />
       </View>
     </SafeAreaView>
   );
@@ -85,7 +102,6 @@ Quiz.defaultProps = {};
 Quiz.propTypes = {};
 
 const mapStateToProps = (state) => ({
-  // activePlay: state.play.active,
   questions: state.questionData.questions,
 });
 

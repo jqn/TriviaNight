@@ -1,14 +1,14 @@
-export const START_PLAY = "START_PLAY";
-export const RESTART_PLAY = "RESTART_PLAY";
-export const COMPLETE_PLAY = "COMPLETE_PLAY";
-export const ADD_PLAY_QUESTIONS = "ADD_PLAY_QUESTIONS";
+export const SET_QUESTIONS = "SET_QUESTIONS";
+export const SET_QUESTION_TIME = "SET_QUESTION_TIME";
+export const SET_ASKED_QUESTIONS = "SET_ASKED_QUESTIONS";
+export const RESET_QUESTIONS = "RESET_QUESTIONS";
 
-export const startPlay = (active) => ({
-  type: START_PLAY,
-  active,
+export const setQuestions = (questionList) => ({
+  type: SET_QUESTIONS,
+  questionList,
 });
 
-export const addPlayQuestions = (questionList) => ({
-  type: ADD_PLAY_QUESTIONS,
+export const resetQuestions = (questionList) => ({
+  type: RESET_QUESTIONS,
   questionList,
 });

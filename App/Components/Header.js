@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     paddingVertical: 8,
+    height: 100,
   },
   title: {
     fontFamily: "System",

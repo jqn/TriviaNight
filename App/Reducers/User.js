@@ -1,20 +1,17 @@
-import { START_PLAY, ADD_PLAY_QUESTIONS } from "../Actions/Questions";
+import { $CombinedState } from "redux";
+import { SET_ANSWER, RESET_USER_DATA } from "../Actions/User";
+const initialState = {
+  totalAnswered: 0,
+  correctAnswered: 0,
+  answers: [],
+};
 
-export const userData = (
-  state = {
-    playComplete: false,
-    totalAnswered: 0,
-    correctAnswered: 0,
-    answers: {},
-  },
-  action
-) => {
+export const userData = (state = initialState, action) => {
   switch (action.type) {
-    case START_PLAY:
-      return { ...state, active: action.active };
-    case ADD_PLAY_QUESTIONS:
-      console.log("action", action);
-      return { ...state, questions: action.questionList };
+    case SET_ANSWER:
+      return { ...state, answers: [...state.answers, action.answer] };
+    case RESET_USER_DATA:
+      return initialState;
     default:
       return state;
   }

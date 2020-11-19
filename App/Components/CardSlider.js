@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   FlatList,
   Image,
@@ -26,13 +26,6 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: "center",
   },
-  // item: {
-  //   backgroundColor: "#454545",
-  // },
-  // photo: {
-  //   width: Math.round(Dimensions.get("window").width - 32),
-  //   height: 200,
-  // },
 });
 
 const Item = ({ content }) => {
@@ -51,6 +44,7 @@ const CardSlider = ({
   indexCallback,
   indicator = true,
   initialIndex,
+  index = 0,
 }) => {
   const [selectedId, setSelectedId] = useState(null);
   const [selectedIndex, setSelectedIndex] = useState(initialIndex);
@@ -70,7 +64,7 @@ const CardSlider = ({
   const onViewRef = React.useRef(({ viewableItems, changed }) => {
     if (viewableItems.length > 0) {
       let currentIndex = viewableItems[0].index;
-      setSelectedIndex(currentIndex);
+      // setSelectedIndex(currentIndex);
 
       LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
 
@@ -79,6 +73,13 @@ const CardSlider = ({
       }
     }
   });
+
+  useEffect(() => {
+    setSelectedIndex(index);
+    if (index > 0) {
+      slider.current.scrollToIndex({ animated: true, index: index });
+    }
+  }, [index]);
 
   const renderItem = ({ item }) => {
     const backgroundColor = item.id === selectedId ? "#727272" : "#3a3a3a";
@@ -104,7 +105,7 @@ const CardSlider = ({
         data={data}
         horizontal
         pagingEnabled={true}
-        // scrollEnabled={false}
+        scrollEnabled={false}
         snapToInterval={totalItemWidth}
         decelerationRate="fast"
         bounces={false}
@@ -125,7 +126,7 @@ const CardSlider = ({
         onViewableItemsChanged={onViewRef.current}
         viewabilityConfig={viewConfigRef.current}
       />
-      <Hint text="1 of 10" />
+      <Hint text={`${selectedIndex + 1} of ${data.length}`} />
     </SafeAreaView>
   );
 };
