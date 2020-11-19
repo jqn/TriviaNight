@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
 import PropTypes from "prop-types";
 
@@ -14,16 +14,19 @@ import Button from "../Components/Button";
 import Hint from "../Components/Hint";
 import Section from "../Components/Section";
 
-const Results = ({ navigation, dispatch, questions }) => {
+const Results = ({ navigation, dispatch, answers, correct }) => {
+  const [data, setData] = useState(answers);
+
   const restart = () => {
     dispatch(resetUserData());
     navigation.navigate("Home");
   };
+
   return (
     <SafeAreaView style={styles.container}>
-      <Header title={"You scored\n3/10"} />
+      <Header title={`You scored\n${correct}/${answers.length}`} />
       <Section>
-        <List data={questions} />
+        <List data={data} />
       </Section>
       <Button onButtonPress={restart} buttonTitle="Play Again?" />
     </SafeAreaView>
@@ -42,7 +45,8 @@ Results.defaultProps = {};
 Results.propTypes = {};
 
 const mapStateToProps = (state) => ({
-  questions: state.questionData.questions,
+  answers: state.userData.answers,
+  correct: state.userData.correctAnswered,
 });
 
 export default connect(mapStateToProps)(Results);

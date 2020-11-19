@@ -14,13 +14,9 @@ import { Ionicons } from "@expo/vector-icons";
 const Item = ({ title, correct }) => (
   <View style={styles.item}>
     <Ionicons
-      name={
-        correct === "True"
-          ? "md-checkmark-circle-outline"
-          : "md-close-circle-outline"
-      }
+      name={correct ? "md-checkmark-circle-outline" : "md-close-circle-outline"}
       size={35}
-      color={correct === "True" ? "#F57C00" : "#4b636e"}
+      color={correct ? "#F57C00" : "#4b636e"}
       style={styles.icon}
     />
     <View style={styles.content}>
@@ -32,10 +28,7 @@ const Item = ({ title, correct }) => (
 const List = ({ data }) => {
   const entities = new Html5Entities();
   const renderItem = ({ item }) => (
-    <Item
-      title={entities.decode(item.question)}
-      correct={item.correct_answer}
-    />
+    <Item title={entities.decode(item.question)} correct={item.correct} />
   );
 
   return (

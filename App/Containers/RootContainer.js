@@ -7,7 +7,7 @@ const Root = () => {
   return (
     <View style={styles.container}>
       <RootNavigator />
-      <StatusBar style="auto" />
+      <StatusBar barStyle="dark-content" />
     </View>
   );
 };

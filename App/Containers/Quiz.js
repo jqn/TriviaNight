@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
 import { setQuestions } from "../Actions/Questions";
-import { setAnswer } from "../Actions/User";
+import { setAnswer, setCorrectAnswered } from "../Actions/User";
 
 import Header from "../Components/Header";
 import CardSlider from "../Components/CardSlider";
@@ -61,8 +61,27 @@ const Quiz = ({ navigation, dispatch, questions }) => {
 
   const next = (answer) => {
     if (questionIndex < questions.length - 1) {
-      dispatch(setAnswer({ id: questions[questionIndex].id, answer: answer }));
+      let correctAnswer =
+        questions[questionIndex].correct_answer === "True" ? true : false;
+
+      let isCorrect = false;
+
+      if (correctAnswer === answer) {
+        dispatch(setCorrectAnswered());
+        isCorrect = true;
+      }
+
+      dispatch(
+        setAnswer({
+          id: questions[questionIndex].id,
+          answer: answer,
+          question: questions[questionIndex].question,
+          correct: isCorrect,
+        })
+      );
+
       setQuestionIndex((questionIndex) => questionIndex + 1);
+
       return;
     }
     navigation.navigate("Results");

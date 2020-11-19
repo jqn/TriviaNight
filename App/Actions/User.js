@@ -11,3 +11,7 @@ export const setAnswer = (answer) => ({
 export const resetUserData = () => ({
   type: RESET_USER_DATA,
 });
+
+export const setCorrectAnswered = () => ({
+  type: SET_CORRECT_ANSWERED,
+});
