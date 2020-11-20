@@ -1,19 +1,19 @@
 import React from "react";
-import { useWindowDimensions, View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 import PropTypes from "prop-types";
 
-const Card = ({ body, border, cardWidth, cardHeight }) => {
-  const window = useWindowDimensions();
+import { Colors, Metrics, Fonts } from "../Themes";
 
+const Card = ({ body, fill, cardWidth, cardHeight, textStyle }) => {
   return (
     <View
       style={[
         styles.container,
-        border ? styles.border : styles.borderless,
+        fill ? styles.fill : styles.default,
         { width: cardWidth, height: cardHeight },
       ]}
     >
-      <Text style={styles.bodyText}>{body}</Text>
+      <Text style={[styles.bodyText, textStyle]}>{body}</Text>
     </View>
   );
 };
@@ -22,18 +22,21 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: "center",
     alignItems: "center",
-    padding: 16,
+    padding: Metrics.largeMargin,
     alignSelf: "center",
+    backgroundColor: Colors.backGround,
   },
   bodyText: {
-    fontFamily: "System",
-    fontSize: 24,
+    ...Fonts.style.h4,
     textAlign: "center",
-    fontWeight: "600",
+    fontWeight: "700",
+    color: Colors.black,
   },
-  border: {
-    borderWidth: 1,
-    borderColor: "#78909C",
+  fill: {
+    backgroundColor: Colors.placeHolder,
+  },
+  default: {
+    backgroundColor: Colors.transparent,
   },
 });
 
@@ -42,6 +45,7 @@ Card.defaultProps = {
   border: true,
   cardWidth: 200,
   cardHeight: 200,
+  textStyle: {},
 };
 
 Card.propTypes = {
@@ -49,6 +53,7 @@ Card.propTypes = {
   border: PropTypes.bool,
   cardWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   cardHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  textStyle: PropTypes.object,
 };
 
 export default Card;

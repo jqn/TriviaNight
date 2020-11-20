@@ -6,7 +6,6 @@ import {
 } from "../Actions/User";
 
 const initialState = {
-  totalAnswered: 0,
   correctAnswered: 0,
   answers: [],
 };

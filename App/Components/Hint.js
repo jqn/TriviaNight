@@ -2,6 +2,8 @@ import React from "react";
 import { View, StyleSheet, Text } from "react-native";
 import PropTypes from "prop-types";
 
+import { Colors, Metrics, Fonts } from "../Themes";
+
 const Hint = ({ text }) => {
   return (
     <View style={styles.container}>
@@ -14,13 +16,13 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     justifyContent: "center",
-    padding: 16,
+    padding: Metrics.largeMargin,
   },
   bodyText: {
-    fontFamily: "System",
-    fontSize: 24,
+    ...Fonts.style.h4,
     textAlign: "center",
-    fontWeight: "500",
+    color: Colors.black,
+    fontWeight: "600",
   },
 });
 

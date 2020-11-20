@@ -1,6 +1,9 @@
 import React from "react";
-import { View, StyleSheet, Pressable, Text } from "react-native";
+import { StyleSheet, Pressable, Text } from "react-native";
+
 import PropTypes from "prop-types";
+
+import { Colors, Metrics, Fonts } from "../Themes";
 
 const Button = ({ buttonTitle, onButtonPress }) => {
   return (
@@ -18,25 +21,25 @@ const Button = ({ buttonTitle, onButtonPress }) => {
 
 const styles = StyleSheet.create({
   title: {
-    color: "#FFF",
-    fontSize: 20,
-    fontFamily: "System",
-    fontWeight: "600",
+    color: Colors.white,
+    ...Fonts.style.h5,
+    fontWeight: "500",
     textAlign: "center",
     textTransform: "uppercase",
   },
   button: {
-    padding: 16,
+    padding: Metrics.largeMargin,
     alignSelf: "center",
     width: 164,
     alignContent: "center",
     borderRadius: 4,
-    paddingVertical: 16,
-    marginHorizontal: 8,
-    marginTop: 16,
+    paddingVertical: Metrics.largeMargin,
+    marginHorizontal: Metrics.baseMargin,
+    marginTop: Metrics.largeMargin,
+    marginBottom: Metrics.baseMargin,
   },
-  default: { backgroundColor: "#F57C00" },
-  pressed: { backgroundColor: "#78909C" },
+  default: { backgroundColor: Colors.secondary },
+  pressed: { backgroundColor: Colors.primaryDark },
 });
 
 Button.defaultProps = { buttonTitle: "", onButtonPress: () => {} };

@@ -3,7 +3,6 @@ import { View, StyleSheet } from "react-native";
 
 import { SafeAreaView } from "react-native-safe-area-context";
 import axios from "axios";
-import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
 import { setQuestions } from "../Actions/Questions";
@@ -15,6 +14,10 @@ import Section from "../Components/Section";
 import Button from "../Components/Button";
 import Loader from "../Components/Loader";
 
+import { triviaFetch } from "../Services/TriviaApi";
+
+import { Metrics } from "../Themes";
+
 const Quiz = ({ navigation, dispatch, questions }) => {
   const [loading, setLoading] = useState(true);
   const [questionIndex, setQuestionIndex] = useState(null);
@@ -23,16 +26,28 @@ const Quiz = ({ navigation, dispatch, questions }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          "https://opentdb.com/api.php?amount=10&difficulty=hard&type=boolean"
+        const response = await triviaFetch(
+          "?amount=10&difficulty=hard&type=boolean",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
         );
         console.log("Quiz -> response", response);
-        const { status, data } = response;
-        if (status !== 200) {
-          throw new Error("Something went wrong!");
+
+        const { response_code, results } = response;
+
+        if (response_code === 1) {
+          throw new Error("No results");
         }
 
-        let questions = data.results.map((r) => ({
+        if (response_code > 1) {
+          throw new Error("Something went wrong, Please try again!");
+        }
+
+        let questions = results.map((r) => ({
           ...r,
           id: `${Math.floor(Math.random() * 1000)}-${Date.now()}`,
         }));
@@ -108,17 +123,13 @@ const Quiz = ({ navigation, dispatch, questions }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
+    padding: Metrics.largeMargin,
   },
   group: {
     flexDirection: "row",
     justifyContent: "space-between",
   },
 });
-
-Quiz.defaultProps = {};
-
-Quiz.propTypes = {};
 
 const mapStateToProps = (state) => ({
   questions: state.questionData.questions,

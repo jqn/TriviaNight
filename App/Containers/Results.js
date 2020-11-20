@@ -1,24 +1,23 @@
-import React, { useState } from "react";
-import { View, StyleSheet } from "react-native";
-import PropTypes from "prop-types";
+import React from "react";
+import { StyleSheet } from "react-native";
 
-import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import { connect } from "react-redux";
 import { resetUserData } from "../Actions/User";
-import { setQuestions } from "../Actions/Questions";
+import { resetQuestions } from "../Actions/Questions";
 
 import Header from "../Components/Header";
 import List from "../Components/List";
 import Button from "../Components/Button";
-import Hint from "../Components/Hint";
 import Section from "../Components/Section";
 
-const Results = ({ navigation, dispatch, answers, correct }) => {
-  const [data, setData] = useState(answers);
+import { Metrics } from "../Themes";
 
+const Results = ({ navigation, dispatch, answers, correct }) => {
   const restart = () => {
     dispatch(resetUserData());
+    dispatch(resetQuestions());
     navigation.navigate("Home");
   };
 
@@ -26,7 +25,7 @@ const Results = ({ navigation, dispatch, answers, correct }) => {
     <SafeAreaView style={styles.container}>
       <Header title={`You scored\n${correct}/${answers.length}`} />
       <Section>
-        <List data={data} />
+        <List data={answers} />
       </Section>
       <Button onButtonPress={restart} buttonTitle="Play Again?" />
     </SafeAreaView>
@@ -36,13 +35,9 @@ const Results = ({ navigation, dispatch, answers, correct }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
+    padding: Metrics.largeMargin,
   },
 });
-
-Results.defaultProps = {};
-
-Results.propTypes = {};
 
 const mapStateToProps = (state) => ({
   answers: state.userData.answers,

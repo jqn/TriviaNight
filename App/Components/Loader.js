@@ -1,11 +1,11 @@
 import React from "react";
 import { ActivityIndicator, View, StyleSheet, Text } from "react-native";
-import PropTypes from "prop-types";
+import { Colors } from "../Themes";
 
 const Loader = () => {
   return (
     <View style={styles.container}>
-      <ActivityIndicator size="large" color="#4B636E" />
+      <ActivityIndicator size="large" color={Colors.graphite} />
       <Text style={styles.text}>Loading</Text>
     </View>
   );
@@ -23,12 +23,8 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     textTransform: "uppercase",
     paddingTop: 8,
-    color: "#4B636E",
+    color: Colors.graphite,
   },
 });
-
-Loader.defaultProps = {};
-
-Loader.propTypes = {};
 
 export default Loader;

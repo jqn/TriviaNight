@@ -64,8 +64,9 @@ const styles = StyleSheet.create({
   },
   content: {
     width: "90%",
-    // backgroundColor: "#ECEFF1",
     padding: 8,
+    borderBottomWidth: 1,
+    borderBottomColor: "#cfd8dc",
   },
 });
 
