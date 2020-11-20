@@ -16,7 +16,7 @@ import MaterialAlert from "../Components/MaterialAlert";
 
 import { triviaFetch } from "../Services/TriviaApi";
 
-import { Metrics } from "../Themes";
+import { Metrics, Colors } from "../Themes";
 
 const Quiz = ({ navigation, dispatch, questions }) => {
   const [loading, setLoading] = useState(true);

@@ -21,7 +21,7 @@ const Button = ({ buttonTitle, onButtonPress }) => {
 
 const styles = StyleSheet.create({
   title: {
-    color: Colors.white,
+    color: Colors.black,
     ...Fonts.style.h5,
     fontWeight: "500",
     textAlign: "center",
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     marginTop: Metrics.largeMargin,
     marginBottom: Metrics.baseMargin,
   },
-  default: { backgroundColor: Colors.secondary },
+  default: { backgroundColor: Colors.secondaryLight },
   pressed: { backgroundColor: Colors.primaryDark },
 });
 

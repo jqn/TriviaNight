@@ -4,10 +4,10 @@ import PropTypes from "prop-types";
 
 import { Colors, Metrics, Fonts } from "../Themes";
 
-const Header = ({ title }) => {
+const Header = ({ title, titleStyle, underLine }) => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>{title}</Text>
+    <View style={[styles.container, underLine && styles.underLine]}>
+      <Text style={[styles.title, titleStyle]}>{title}</Text>
     </View>
   );
 };
@@ -20,19 +20,27 @@ const styles = StyleSheet.create({
     height: 100,
   },
   title: {
-    ...Fonts.style.h2,
+    ...Fonts.style.h3,
     textAlign: "center",
     fontWeight: "500",
-    color: Colors.black,
+    color: Colors.graphite,
+  },
+  underLine: {
+    borderBottomColor: Colors.secondaryLight,
+    borderBottomWidth: 1,
   },
 });
 
 Header.defaultProps = {
   title: "",
+  titleStyle: {},
+  underLine: false,
 };
 
 Header.propTypes = {
   title: PropTypes.string,
+  titleStyle: PropTypes.object,
+  underLine: PropTypes.bool,
 };
 
 export default Header;

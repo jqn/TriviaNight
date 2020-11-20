@@ -114,7 +114,7 @@ const CardSlider = ({ data, indexCallback, initialIndex, index = 0 }) => {
         onViewableItemsChanged={onViewRef.current}
         viewabilityConfig={viewConfigRef.current}
       />
-      <Hint text={`${selectedIndex + 1} of ${data.length}`} />
+      <Hint text={`${selectedIndex + 1} of ${data.length}`} underLine />
     </SafeAreaView>
   );
 };
