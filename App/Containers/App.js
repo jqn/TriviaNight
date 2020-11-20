@@ -1,5 +1,6 @@
 import "react-native-gesture-handler";
 import React from "react";
+import { SplashScreen } from "expo";
 
 import { Provider } from "react-redux";
 import store from "../Store";

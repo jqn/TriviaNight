@@ -39,7 +39,6 @@ const Quiz = ({ navigation, dispatch, questions }) => {
             },
           }
         );
-        console.log("Quiz -> response", response);
 
         const { response_code, results } = response;
 

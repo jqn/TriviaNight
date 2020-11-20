@@ -17,7 +17,6 @@ export const triviaFetch = async (path, options = {}) => {
 
     const res = await axios({ url: url, ...options });
 
-    console.log("res", res);
     if (res.status !== 200) {
       throw new Error("Something went wrong... please try again.");
     }
