@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { View, StyleSheet } from "react-native";
 
 import { SafeAreaView } from "react-native-safe-area-context";
-import axios from "axios";
 
 import { connect } from "react-redux";
 import { setQuestions } from "../Actions/Questions";
@@ -13,6 +12,7 @@ import CardSlider from "../Components/CardSlider";
 import Section from "../Components/Section";
 import Button from "../Components/Button";
 import Loader from "../Components/Loader";
+import MaterialAlert from "../Components/MaterialAlert";
 
 import { triviaFetch } from "../Services/TriviaApi";
 
@@ -22,6 +22,10 @@ const Quiz = ({ navigation, dispatch, questions }) => {
   const [loading, setLoading] = useState(true);
   const [questionIndex, setQuestionIndex] = useState(null);
   const [cardTitle, setCardTitle] = useState("");
+  const [alertVisible, setAlertVisible] = useState(false);
+  const [alertMessage, setAlertMessage] = useState(
+    "Something went wrong, Please try again!"
+  );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -53,7 +57,8 @@ const Quiz = ({ navigation, dispatch, questions }) => {
         }));
         dispatch(setQuestions(questions));
       } catch (error) {
-        console.log("Quiz -> error", error);
+        setAlertVisible(true);
+        setAlertMessage(error.message);
       } finally {
         setLoading(false);
         setQuestionIndex(0);
@@ -102,6 +107,11 @@ const Quiz = ({ navigation, dispatch, questions }) => {
     navigation.navigate("Results");
   };
 
+  const handleError = () => {
+    setAlertVisible(false);
+    navigation.navigate("Home");
+  };
+
   if (loading) {
     return <Loader />;
   }
@@ -116,6 +126,13 @@ const Quiz = ({ navigation, dispatch, questions }) => {
         <Button buttonTitle="true" onButtonPress={() => next(true)} />
         <Button buttonTitle="false" onButtonPress={() => next(false)} />
       </View>
+      <MaterialAlert
+        visible={alertVisible}
+        title="Error:"
+        message={alertMessage}
+        onCancelPress={handleError}
+        onConfirmPress={handleError}
+      />
     </SafeAreaView>
   );
 };
