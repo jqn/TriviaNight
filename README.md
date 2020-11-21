@@ -1,5 +1,9 @@
 # Trivia Night
 
+## Repo
+
+https://github.com/jqn/TriviaNight.git
+
 ## Overview
 
 Your challenge is to create a 10 question, true or false, trivia app in the technology you are applying to work in. **You should not just implement the most basic solution. This is a chance to show off your abilities and impress.**
