@@ -8,7 +8,6 @@ import {
   StatusBar,
 } from "react-native";
 
-import { Html5Entities } from "html-entities";
 import { Ionicons } from "@expo/vector-icons";
 
 const Item = ({ title, correct }) => (
@@ -26,9 +25,8 @@ const Item = ({ title, correct }) => (
 );
 
 const List = ({ data }) => {
-  const entities = new Html5Entities();
   const renderItem = ({ item }) => (
-    <Item title={entities.decode(item.question)} correct={item.correct} />
+    <Item title={item.question} correct={item.correct} />
   );
 
   return (

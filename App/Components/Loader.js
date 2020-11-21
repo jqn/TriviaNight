@@ -2,11 +2,13 @@ import React from "react";
 import { ActivityIndicator, View, StyleSheet, Text } from "react-native";
 import { Colors } from "../Themes";
 
-const Loader = () => {
+import PropTypes from "prop-types";
+
+const Loader = ({ message }) => {
   return (
     <View style={styles.container}>
       <ActivityIndicator size="large" color={Colors.graphite} />
-      <Text style={styles.text}>Loading</Text>
+      <Text style={styles.text}>{message}</Text>
     </View>
   );
 };
@@ -26,5 +28,11 @@ const styles = StyleSheet.create({
     color: Colors.graphite,
   },
 });
+
+Loader.defaultProps = { message: "Loading" };
+
+Loader.propTypes = {
+  message: PropTypes.string,
+};
 
 export default Loader;

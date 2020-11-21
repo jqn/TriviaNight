@@ -15,8 +15,9 @@ import Loader from "../Components/Loader";
 import MaterialAlert from "../Components/MaterialAlert";
 
 import { triviaFetch } from "../Services/TriviaApi";
+import { formatData } from "../Utils/dataFormatter";
 
-import { Metrics, Colors } from "../Themes";
+import { Metrics } from "../Themes";
 
 const Quiz = ({ navigation, dispatch, questions }) => {
   const [loading, setLoading] = useState(true);
@@ -50,10 +51,8 @@ const Quiz = ({ navigation, dispatch, questions }) => {
           throw new Error("Something went wrong, Please try again!");
         }
 
-        let questions = results.map((r) => ({
-          ...r,
-          id: `${Math.floor(Math.random() * 1000)}-${Date.now()}`,
-        }));
+        let questions = formatData(results);
+
         dispatch(setQuestions(questions));
       } catch (error) {
         setAlertVisible(true);
@@ -112,7 +111,7 @@ const Quiz = ({ navigation, dispatch, questions }) => {
   };
 
   if (loading) {
-    return <Loader />;
+    return <Loader message="Fetching Trivia" />;
   }
 
   return (

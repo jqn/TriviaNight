@@ -8,23 +8,19 @@ import {
   SafeAreaView,
 } from "react-native";
 
-import { Html5Entities } from "html-entities";
-
 import Card from "./Card";
 import Hint from "./Hint";
 import { Colors } from "../Themes";
 
 const { UIManager } = NativeModules;
-const entities = new Html5Entities();
 
 UIManager.setLayoutAnimationEnabledExperimental &&
   UIManager.setLayoutAnimationEnabledExperimental(true);
 
 const Item = ({ content }) => {
-  // Use html-entities to decode entity characters in string
   return (
     <Card
-      body={entities.decode(content)}
+      body={content}
       cardWidth={Math.round(Dimensions.get("window").width - 32)}
       cardHeight={Math.round(Dimensions.get("window").width - 32)}
       fill
