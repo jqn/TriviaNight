@@ -8,6 +8,8 @@ import {
   SafeAreaView,
 } from "react-native";
 
+import PropTypes from "prop-types";
+
 import Card from "./Card";
 import Hint from "./Hint";
 import { Colors } from "../Themes";
@@ -29,7 +31,7 @@ const Item = ({ content }) => {
   );
 };
 
-const CardSlider = ({ data, indexCallback, initialIndex, index = 0 }) => {
+const CardSlider = ({ data, indexCallback, initialIndex, index }) => {
   const [selectedId, setSelectedId] = useState(null);
   const [selectedIndex, setSelectedIndex] = useState(initialIndex);
 
@@ -66,7 +68,8 @@ const CardSlider = ({ data, indexCallback, initialIndex, index = 0 }) => {
   }, [index]);
 
   const renderItem = ({ item }) => {
-    const backgroundColor = item.id === selectedId ? "#727272" : "#3a3a3a";
+    const backgroundColor =
+      item.id === selectedId ? Colors.primary : Colors.graphite;
 
     const setIndex = (selectedItem) => {
       setSelectedId(selectedItem.id);
@@ -120,5 +123,19 @@ const styles = StyleSheet.create({
     color: Colors.graphite,
   },
 });
+
+CardSlider.defaultProps = {
+  data: [],
+  indexCallback: () => {},
+  initialIndex: 0,
+  index: 0,
+};
+
+CardSlider.propTypes = {
+  data: PropTypes.array,
+  indexCallback: PropTypes.func,
+  initialIndex: PropTypes.number,
+  index: PropTypes.number,
+};
 
 export default CardSlider;

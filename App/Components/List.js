@@ -9,13 +9,16 @@ import {
 } from "react-native";
 
 import { Ionicons } from "@expo/vector-icons";
+import PropTypes from "prop-types";
+
+import { Colors } from "../Themes";
 
 const Item = ({ title, correct }) => (
   <View style={styles.item}>
     <Ionicons
       name={correct ? "md-checkmark-circle-outline" : "md-close-circle-outline"}
       size={35}
-      color={correct ? "#F57C00" : "#4b636e"}
+      color={correct ? Colors.secondary : Colors.primaryDark}
       style={styles.icon}
     />
     <View style={styles.content}>
@@ -64,8 +67,14 @@ const styles = StyleSheet.create({
     width: "90%",
     padding: 8,
     borderBottomWidth: 1,
-    borderBottomColor: "#cfd8dc",
+    borderBottomColor: Colors.primary,
   },
 });
+
+List.defaultProps = { data: [] };
+
+List.propTypes = {
+  data: PropTypes.array,
+};
 
 export default List;
