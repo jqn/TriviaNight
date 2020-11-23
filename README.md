@@ -1,36 +1,8 @@
 # Trivia Night
 
-## Repo
-
-https://github.com/jqn/TriviaNight.git
-
 ## Overview
 
-Your challenge is to create a 10 question, true or false, trivia app in the technology you are applying to work in. **You should not just implement the most basic solution. This is a chance to show off your abilities and impress.**
-
-**The application code will be reviewed and scored on these key areas with many subset areas for each:**
-
-- Functionality
-- Code Format
-- Project Structure
-- Scalability
-- Maintainability
-- Use of industry best practices
-
-Some specific things that we are looking for:
-
-- Typescript if you know it
-- Use of Expo for React Native projects
-- Correct implementation of a state manager
-- Correct implementation of a navigation solution
-- Componentization
-- Communication in the repo and/or code
-- Best practices with API calls and data
-- Separation of concerns between business and UI logic
-
-## Goals
-
-Implement the screens based off the wireframes and api below using **advanced techniques** and **industry best practices** for your platform. Note that the wireframes may not be complete, so use your best judgment for UI/UX implementation. **Do not use a boilerplate like React Boilerplate or Ignite for this challenge.** We want to see how you structure your project and what tooling you use from scratch. Create react app is fine to use. React Native projects should use the Expo CLI workflow: https://facebook.github.io/react-native/docs/getting-started
+A 10 question, true or false, trivia cross-platform app.
 
 ## Specifications
 
@@ -58,14 +30,14 @@ Sample returned json:
 
 ### Intro / Home Screen:
 
-![The Intro screen for the app](https://raw.githubusercontent.com/g2i/code-challenge-static-assets/master/Intro.png "The intro screen for the app")
+![The Intro screen for the app](./assets/home.png "The intro screen for the app")
 
 - Static Text
 - BEGIN button navigates to the Quiz screen and starts the Quiz
 
 ### Quiz Screen:
 
-![The Quiz screen for the app](https://raw.githubusercontent.com/g2i/code-challenge-static-assets/master/Quiz.png "The quiz screen for the app")
+![The Quiz screen for the app](./assets/quiz.png "The quiz screen for the app")
 
 - The headline is from question category
 - The card element contains the current question
@@ -74,10 +46,36 @@ Sample returned json:
 
 ### Results screen:
 
-![The Results screen for the app](https://raw.githubusercontent.com/g2i/code-challenge-static-assets/master/Score.png "The score screen for the app")
+![The Results screen for the app](./assets/results.png "The score screen for the app")
 
 - The Score shows correct and total
 - Displays a list of the questions and whether the answer was correct or not
 - PLAY AGAIN starts over and navigates to the Home Screen
 
+### Features
+
+- Redux
+- Hooks
+- Themes
+
+### Stack
+
+- Expo
+
+### Installation
+
+> **Note:** Be sure you have the React Native CLI [installed on your system](https://facebook.github.io/react-native/docs/getting-started).
+
+- `git clone https://github.com/jqn/TriviaNight.git`
+- `yarn install`/`npm install`
+- `(cd ios && pod install)`
+
+### Running
+
+- `yarn run ios`/`npm run ios` or `yarn run android`/`npm run android`
+
+License
+
 ---
+
+MIT
