@@ -30,14 +30,14 @@ Sample returned json:
 
 ### Intro / Home Screen:
 
-![The Intro screen for the app](./assets/home.png "The intro screen for the app")
+![The Intro screen for the app](./assets/screen_shots/home.png "The intro screen for the app")
 
 - Static Text
 - BEGIN button navigates to the Quiz screen and starts the Quiz
 
 ### Quiz Screen:
 
-![The Quiz screen for the app](./assets/quiz.png "The quiz screen for the app")
+![The Quiz screen for the app](./assets/screen_shots/quiz.png "The quiz screen for the app")
 
 - The headline is from question category
 - The card element contains the current question
@@ -46,7 +46,7 @@ Sample returned json:
 
 ### Results screen:
 
-![The Results screen for the app](./assets/results.png "The score screen for the app")
+![The Results screen for the app](./assets/screen_shots/results.png "The score screen for the app")
 
 - The Score shows correct and total
 - Displays a list of the questions and whether the answer was correct or not
